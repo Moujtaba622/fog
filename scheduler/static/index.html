@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FogEdit Scheduler (prototype)</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+<h1>FogEdit Scheduler <span class="badge">round-robin prototype</span></h1>
+<div id="nodes-summary" class="nodes-summary">Loading nodes...</div>
+</header>
+<main>
+<section>
+<h2>Fog Nodes</h2>
+<div id="nodes-grid" class="nodes-grid"></div>
+</section>
+<section>
+<h2>Submit Job</h2>
+<form id="submit-form">
+<label>Video file<br><input type="file" id="video-file" accept="video/*" required></label>
+<label>Operations (JSON array)<br>
+<textarea id="ops-json" rows="6" required>[{"op":"trim","start":0,"end":4}]</textarea>
+</label>
+<button type="submit" id="submit-btn">Upload + Submit Job</button>
+</form>
+<div id="submit-result" class="submit-result hidden"></div>
+</section>
+<section>
+<h2>Jobs</h2>
+<ul id="jobs-list"></ul>
+</section>
+</main>
+<template id="job-item-template">
+<li class="job-item">
+<div class="job-header">
+<span class="job-node"></span>
+<span class="job-id"></span>
+<span class="job-status"></span>
+</div>
+<div class="progress-bar"><div class="progress-fill"></div></div>
+<div class="job-step"></div>
+<div class="job-error"></div>
+<a class="job-download hidden" href="#">Download result</a>
+</li>
+</template>
+<script src="/static/app.js"></script>
+</body>
+</html>

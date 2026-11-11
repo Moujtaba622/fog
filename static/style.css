@@ -1,0 +1,232 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+  line-height: 1.5;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #1f2937;
+  color: #fff;
+}
+
+header h1 {
+  font-size: 1.4rem;
+}
+
+.node-info {
+  font-size: 0.85rem;
+  background: #374151;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+}
+
+main {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+section h2,
+section h3 {
+  margin-bottom: 1rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+input,
+select,
+button {
+  font: inherit;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #3b82f6;
+  border-color: #3b82f6;
+}
+
+button {
+  cursor: pointer;
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+button.remove-op {
+  background: #ef4444;
+}
+
+button.remove-op:hover {
+  background: #dc2626;
+}
+
+ul {
+  list-style: none;
+}
+
+#project-list li {
+  padding: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  cursor: pointer;
+}
+
+#project-list li:hover {
+  background: #f3f4f6;
+}
+
+#project-list li.active {
+  background: #dbeafe;
+  font-weight: 600;
+}
+
+video {
+  width: 100%;
+  max-height: 400px;
+  background: #000;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+#file-meta {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.op-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.op-item span {
+  font-weight: 600;
+  min-width: 80px;
+}
+
+.add-operation {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+#submit-job-btn {
+  width: 100%;
+  padding: 0.75rem;
+}
+
+.job-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.job-status {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background: #e5e7eb;
+}
+
+.job-status.COMPLETED {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.job-status.FAILED {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.job-status.PROCESSING {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #3b82f6;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.job-step {
+  font-size: 0.85rem;
+  color: #4b5563;
+  margin-bottom: 0.25rem;
+}
+
+.job-error {
+  font-size: 0.85rem;
+  color: #991b1b;
+  margin-bottom: 0.25rem;
+}
+
+.job-download {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #3b82f6;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.job-download:hover {
+  text-decoration: underline;
+}

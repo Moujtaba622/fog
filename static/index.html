@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FogEdit</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+<h1>FogEdit</h1>
+<div id="node-info" class="node-info">Loading node info...</div>
+</header>
+<main>
+<section id="projects-section">
+<h2>Projects</h2>
+<form id="create-project-form">
+<input type="text" id="project-name" placeholder="Project name" required>
+<button type="submit">Create Project</button>
+</form>
+<ul id="project-list"></ul>
+</section>
+<section id="project-view" class="hidden">
+<h2 id="current-project-name"></h2>
+<section id="upload-section">
+<h3>Upload Video</h3>
+<form id="upload-form" enctype="multipart/form-data">
+<input type="file" id="video-file" accept="video/*" required>
+<button type="submit">Upload</button>
+</form>
+<video id="video-preview" controls class="hidden"></video>
+<div id="file-meta" class="hidden"></div>
+</section>
+<section id="operations-section" class="hidden">
+<h3>Operations Pipeline</h3>
+<div id="operations-list"></div>
+<div class="add-operation">
+<select id="op-select">
+<option value="trim">Trim</option>
+<option value="resize">Resize</option>
+<option value="compress">Compress</option>
+<option value="convert">Convert</option>
+</select>
+<button id="add-op-btn" type="button">Add Operation</button>
+</div>
+<button id="submit-job-btn" type="button">Submit Job</button>
+</section>
+<section id="jobs-section" class="hidden">
+<h3>Jobs</h3>
+<ul id="job-list"></ul>
+</section>
+</section>
+</main>
+<template id="op-trim-template">
+<div class="op-item" data-op="trim">
+<span>Trim</span>
+<input type="number" data-field="start" placeholder="Start (s)" step="0.1" min="0" required>
+<input type="number" data-field="end" placeholder="End (s)" step="0.1" min="0" required>
+<button type="button" class="remove-op">Remove</button>
+</div>
+</template>
+<template id="op-resize-template">
+<div class="op-item" data-op="resize">
+<span>Resize</span>
+<input type="number" data-field="width" placeholder="Width" min="1" required>
+<input type="number" data-field="height" placeholder="Height" min="1" required>
+<button type="button" class="remove-op">Remove</button>
+</div>
+</template>
+<template id="op-compress-template">
+<div class="op-item" data-op="compress">
+<span>Compress</span>
+<input type="number" data-field="crf" placeholder="CRF (0-51)" min="0" max="51" value="23" required>
+<select data-field="preset">
+<option value="ultrafast">ultrafast</option>
+<option value="superfast">superfast</option>
+<option value="veryfast">veryfast</option>
+<option value="faster">faster</option>
+<option value="fast">fast</option>
+<option value="medium" selected>medium</option>
+<option value="slow">slow</option>
+<option value="slower">slower</option>
+<option value="veryslow">veryslow</option>
+</select>
+<button type="button" class="remove-op">Remove</button>
+</div>
+</template>
+<template id="op-convert-template">
+<div class="op-item" data-op="convert">
+<span>Convert</span>
+<select data-field="format">
+<option value="mp4">mp4</option>
+<option value="webm">webm</option>
+<option value="mkv">mkv</option>
+<option value="avi">avi</option>
+</select>
+<button type="button" class="remove-op">Remove</button>
+</div>
+</template>
+<template id="job-item-template">
+<li class="job-item">
+<div class="job-header">
+<span class="job-id"></span>
+<span class="job-status"></span>
+</div>
+<div class="progress-bar"><div class="progress-fill"></div></div>
+<div class="job-step"></div>
+<div class="job-error"></div>
+<a class="job-download hidden" href="#">Download result</a>
+</li>
+</template>
+<script src="/static/app.js"></script>
+</body>
+</html>
