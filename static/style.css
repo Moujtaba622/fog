@@ -230,3 +230,43 @@ video {
 .job-download:hover {
   text-decoration: underline;
 }
+
+
+.op-item.op-wide {
+  align-items: flex-start;
+}
+
+.op-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.op-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.op-fields input,
+.op-fields select {
+  width: 100%;
+}
+
+.cb-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 90px repeat(3, 1fr);
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.op-hint {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  color: #6b7280;
+}

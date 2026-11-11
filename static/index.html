@@ -40,6 +40,8 @@
 <option value="resize">Resize</option>
 <option value="compress">Compress</option>
 <option value="convert">Convert</option>
+<option value="denoise">Denoise</option>
+<option value="color_grade">Color grade</option>
 </select>
 <button id="add-op-btn" type="button">Add Operation</button>
 </div>
@@ -97,6 +99,94 @@
 <button type="button" class="remove-op">Remove</button>
 </div>
 </template>
+
+<template id="op-denoise-template">
+<div class="op-item op-wide" data-op="denoise">
+<span>Denoise</span>
+<div class="op-fields">
+<label>Method
+<select data-field="method">
+<option value="nlmeans">nlmeans (best quality, slow)</option>
+<option value="hqdn3d">hqdn3d (fast)</option>
+</select>
+</label>
+<label>Intensity
+<select data-field="intensity">
+<option value="light">light</option>
+<option value="medium">medium</option>
+<option value="strong">strong</option>
+</select>
+</label>
+<label>Strength (nlmeans only, 1 to 30)
+<input type="number" data-field="strength" min="1" max="30" step="0.5" placeholder="auto">
+</label>
+<small class="op-hint">Leave strength empty to use the intensity preset. hqdn3d ignores strength.</small>
+</div>
+<button type="button" class="remove-op">Remove</button>
+</div>
+</template>
+<template id="op-color_grade-template">
+<div class="op-item op-wide" data-op="color_grade">
+<span>Color grade</span>
+<div class="op-fields">
+<label>Style preset
+<select data-field="preset">
+<option value="">none</option>
+<option value="warm">warm</option>
+<option value="cool">cool</option>
+<option value="cinematic">cinematic</option>
+<option value="vivid">vivid</option>
+</select>
+</label>
+<label>Brightness (-1 to 1)
+<input type="number" data-field="brightness" min="-1" max="1" step="0.05" placeholder="0">
+</label>
+<label>Contrast (0 to 3)
+<input type="number" data-field="contrast" min="0" max="3" step="0.05" placeholder="1">
+</label>
+<label>Saturation (0 to 3)
+<input type="number" data-field="saturation" min="0" max="3" step="0.05" placeholder="1">
+</label>
+<label>Gamma (0.1 to 10)
+<input type="number" data-field="gamma" min="0.1" max="10" step="0.05" placeholder="1">
+</label>
+<label>Curves preset
+<select data-field="curves_preset">
+<option value="">none</option>
+<option value="lighter">lighter</option>
+<option value="darker">darker</option>
+<option value="increase_contrast">increase_contrast</option>
+<option value="medium_contrast">medium_contrast</option>
+<option value="strong_contrast">strong_contrast</option>
+<option value="linear_contrast">linear_contrast</option>
+<option value="cross_process">cross_process</option>
+<option value="vintage">vintage</option>
+<option value="negative">negative</option>
+<option value="color_negative">color_negative</option>
+</select>
+</label>
+<div class="cb-row"><b>Shadows</b>
+<input type="number" data-field="cb_shadows_r" min="-1" max="1" step="0.05" placeholder="R">
+<input type="number" data-field="cb_shadows_g" min="-1" max="1" step="0.05" placeholder="G">
+<input type="number" data-field="cb_shadows_b" min="-1" max="1" step="0.05" placeholder="B">
+</div>
+<div class="cb-row"><b>Midtones</b>
+<input type="number" data-field="cb_midtones_r" min="-1" max="1" step="0.05" placeholder="R">
+<input type="number" data-field="cb_midtones_g" min="-1" max="1" step="0.05" placeholder="G">
+<input type="number" data-field="cb_midtones_b" min="-1" max="1" step="0.05" placeholder="B">
+</div>
+<div class="cb-row"><b>Highlights</b>
+<input type="number" data-field="cb_highlights_r" min="-1" max="1" step="0.05" placeholder="R">
+<input type="number" data-field="cb_highlights_g" min="-1" max="1" step="0.05" placeholder="G">
+<input type="number" data-field="cb_highlights_b" min="-1" max="1" step="0.05" placeholder="B">
+</div>
+<small class="op-hint">Empty fields are left unchanged. Values you type override the style preset, and any color balance you enter replaces the preset's own tint.</small>
+</div>
+<button type="button" class="remove-op">Remove</button>
+</div>
+</template>
+
+
 <template id="job-item-template">
 <li class="job-item">
 <div class="job-header">

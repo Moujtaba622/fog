@@ -179,7 +179,9 @@
 	  trim: { op: 'trim', start: 0, end: 1 },
 	  resize: { op: 'resize', width: 1280, height: 720 },
 	  compress: { op: 'compress', crf: 23, preset: 'medium' },
-	  convert: { op: 'convert', format: 'mp4' }
+	  convert: { op: 'convert', format: 'mp4' },
+	  denoise: { op: 'denoise', method: 'nlmeans', intensity: 'medium' },
+	  color_grade: { op: 'color_grade', preset: 'cinematic' }
 	};
 	state.operations.push(defaults[op]);
 	renderOperations();
@@ -227,6 +229,36 @@
 
   els.addOpBtn.addEventListener('click', addOperation);
 
+    function cleanOperation(op) {
+	var out = {};
+	Object.keys(op).forEach(function (k) {
+	  var v = op[k];
+	  if (v === '' || v === undefined || v === null) return;
+	  out[k] = v;
+	});
+	if (out.op === 'denoise' && out.method === 'hqdn3d') {
+	  delete out.strength;
+	}
+	if (out.op === 'color_grade') {
+	  var balance = {};
+	  ['shadows', 'midtones', 'highlights'].forEach(function (tone) {
+		['r', 'g', 'b'].forEach(function (ch) {
+		  var key = 'cb_' + tone + '_' + ch;
+		  if (out[key] !== undefined) {
+			balance[tone] = balance[tone] || {};
+			balance[tone][ch] = out[key];
+			delete out[key];
+		  }
+		});
+	  });
+	  if (Object.keys(balance).length) out.colorbalance = balance;
+	  if (out.curves_preset) out.curves = { preset: out.curves_preset };
+	  delete out.curves_preset;
+	}
+	return out;
+  }
+
+
   els.submitJobBtn.addEventListener('click', function () {
 	if (!state.currentProject || !state.currentFile) {
 	  alert('Upload a file first.');
@@ -239,7 +271,7 @@
 	var payload = {
 	  file_id: state.currentFile.id,
 	  project_id: state.currentProject.id,
-	  operations: state.operations
+	  operations: state.operations.map(cleanOperation)
 	};
 	els.submitJobBtn.disabled = true;
 	api('/jobs', {
